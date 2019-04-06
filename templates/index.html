@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+    {% block the_stuff %}
+        <h2>SignUp</h2>
+        <form action='/add_user' method='post'>
+            <label>Username
+                <input type='text' name='new-account'/>
+            </label>
+            <input type='submit' value='Add It'/>
+        </form>
+        <form action='/save_password' method='post'>
+            <label>Password
+                <input type='password' name='password_saved'/>
+            </label>
+            <input type='submit' value='Saved It'/>
+        </form>
+        <form action='/verify_password' method='post'>
+            <label>Verify Password
+                <input type='password' name='password_verified'/>
+            </label>
+            <input type='submit' value='Verified It'/>
+        </form>
+        <form action='/email' method='post'>
+            <label>Email (optional)
+                <input type='text' name='new-account'/>
+            </label>
+            <input type='submit' value='Email Stored'/>
+        </form>
+
+    {% endblock %}
