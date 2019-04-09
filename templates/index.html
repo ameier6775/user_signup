@@ -1,30 +1,27 @@
 {% extends 'base.html' %}
 
     {% block the_stuff %}
-        <h2>SignUp</h2>
+        <h1>Signup</h1>
         <form action='/add_user' method='post'>
-            <label>Username
-                <input type='text' name='new-account'/>
+            <label>Username<br>
+                <input type='text' name='new-account' autocomplete="on"/>
             </label>
-            <input type='submit' value='Add It'/>
-        </form>
-        <form action='/save_password' method='post'>
-            <label>Password
-                <input type='password' name='password_saved'/>
+            <br>
+            <label>Password<br>
+                <input type='password' name='new-password' autocomplete="off"/>
             </label>
-            <input type='submit' value='Saved It'/>
-        </form>
-        <form action='/verify_password' method='post'>
-            <label>Verify Password
-                <input type='password' name='password_verified'/>
+            <br>
+            <label>Verify Password<br>
+                <input type='password' name='password-verified' autocomplete="off"/>
             </label>
-            <input type='submit' value='Verified It'/>
-        </form>
-        <form action='/email' method='post'>
-            <label>Email (optional)
-                <input type='text' name='new-account'/>
+            <br>
+            <label>Email (optional)<br>
+                <input type='text' name='email-created' autocomplete="on"/>
             </label>
-            <input type='submit' value='Email Stored'/>
+            <br>
+            <input type='submit' value='Submit'/>
         </form>
-
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
     {% endblock %}
