@@ -41,6 +41,11 @@ def add_user():
             email_error = 'That\'s not a valid email'
             errors.append(email_error)
             new_email = ""
+        if new_email.count('@') > 1 or new_email.count('.') > 1:
+            email_error = 'That\'s not a valid email'
+            errors.append(email_error)
+            new_email = ""
+
 
     names.append(new_email)
     names.append(new_account)
