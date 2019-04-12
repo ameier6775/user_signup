@@ -12,30 +12,39 @@ def add_user():
     password_ver = request.form['password-verified']
     new_email = request.form['email-created']
 
-    escaped_account = cgi.escape(new_account)
-    escaped_password = cgi.escape(new_password)
-    escaped_ver = cgi.escape(password_ver)
-    escaped_email = cgi.escape(new_email)
+    user_error = ""
+    password_error = ""
+    pass_val_error = ""
+    email_error = ""
+
+    errors = []
+    names = []
+
+    if new_account == "" or len(new_account) < 3 or len(new_account) > 20:
+        user_error = 'That\'s not a valid username'
+        errors.append(user_error)
+        names.append(new_account)
+
+    if new_password == "" or len(new_password) < 3 or len(new_password) > 20:
+        password_error = 'That\'s not a valid password'
+        errors.append(password_error)
 
 
-    if escaped_account == "" or len(escaped_account) < 3 or len(escaped_account) > 20:
-        error = 'That\'s not a valid username'
-        return redirect('/?error='+ error)
+    if new_password != password_ver:
+        pass_val_error = 'Passwords don\'t match'
+        errors.append(pass_val_error)
 
-    if escaped_password == "" or len(escaped_password) < 3 or len(escaped_password) > 20:
-        error = 'That\'s not a valid password'
-        return redirect('/?error='+ error)
 
-    if escaped_password != escaped_ver:
-        error = 'Passwords don\'t match'
-        return redirect('/?error=' + error)
+    if len(new_email) > 0:
+        if "@" not in new_email or "." not in new_email or len(new_email) < 3 or len(new_email) > 20:
+            email_error = 'That\'s not a valid email'
+            errors.append(email_error)
+            names.append(new_email)
 
-    if len(escaped_email) > 0:
-        if "@" not in escaped_email or "." not in escaped_email or len(escaped_email) < 3 or len(escaped_email) > 20:
-            error = 'That\'s not a valid email'
-            return redirect('/?error=' + error)
-        
-    return render_template('welcome.html', result=escaped_account)
+    if len(errors) > 0:
+        return render_template('index.html', user_error=user_error, password_error=password_error, pass_val_error=pass_val_error, email_error=email_error, new_account=new_account, new_email=new_email)
+    else:
+        return render_template('welcome.html', result=new_account)
 
 @app.route('/')
 def index():
