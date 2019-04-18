@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+    {% block the_stuff %}
+        <h1>Signup</h1>
+        <form action='/add_user' method='post'>
+            <label>Username<br>
+                <input type='text' name='new-account' id='new-account' autocomplete='on' value ={{new_account}} >
+                {% if user_error %}
+                <p>{{ user_error }}</p>
+                {% endif %}
+            </label>
+            <br>
+            <label>Password<br>
+                <input type='password' name='new-password' autocomplete="off"/>
+                {% if password_error %}
+                <p>{{ password_error }}</p>
+                {% endif %}
+            </label>
+            <br>
+            <label>Verify Password<br>
+                <input type='password' name='password-verified' autocomplete="off"/>
+                {% if pass_val_error %}
+                <p>{{ pass_val_error }}</p>
+                {% endif %}
+            </label>
+            <br>
+            <label>Email (optional)<br>
+                <input type='text' name='email-created' autocomplete="on" value={{new_email}}  >
+                {% if email_error %}
+                <p>{{ email_error }}</p>
+                {% endif %}
+            </label>
+            <br>
+            <input type='submit' value='Submit'/>
+        </form>
+    {% endblock %}
